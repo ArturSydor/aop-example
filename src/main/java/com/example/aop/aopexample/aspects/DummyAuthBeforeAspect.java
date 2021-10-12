@@ -18,7 +18,7 @@ public class DummyAuthBeforeAspect {
      *
      * @param joinPoint input params of method that is executed
      */
-    @Before("execution(* com.example.aop.aopexample.business.*.*(..))")
+    @Before("com.example.aop.aopexample.aspects.CommonPointCutConfig.businessLogicExecution()")
     public void beforeMethod(JoinPoint joinPoint) {
         log.info("Authorisation for {}", joinPoint.toShortString());
     }
@@ -33,5 +33,11 @@ public class DummyAuthBeforeAspect {
         // logic inside is called advice
         log.info("Authorisation for {}", joinPoint.toShortString());
     }
+
+    @Before("com.example.aop.aopexample.aspects.CommonPointCutConfig.dataLayerExecution()")
+    public void beforeRepositoryCalled(JoinPoint joinPoint) {
+        log.info("Auth before calling {}", joinPoint.toShortString());
+    }
+
 
 }

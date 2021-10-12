@@ -13,19 +13,19 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class AfterAccessAspect {
 
-    @AfterReturning(value = "execution(* com.example.aop.aopexample.business.*.*(..))",
+    @AfterReturning(value = "com.example.aop.aopexample.aspects.CommonPointCutConfig.businessLogicExecution()",
             returning = "result")
     public void afterExecution(JoinPoint joinPoint, Object result) {
         log.info("Checking return value={} after {} was executed", result, joinPoint.toShortString());
     }
 
-    @AfterThrowing(value = "execution(* com.example.aop.aopexample.business.*.*(..))",
+    @AfterThrowing(value = "com.example.aop.aopexample.aspects.CommonPointCutConfig.businessLogicExecution()",
             throwing = "exception")
     public void afterThrowing(JoinPoint joinPoint, Exception exception) {
         log.warn("{} throws an exception with message {}", joinPoint.toShortString(), exception.getMessage());
     }
 
-    @After("execution(* com.example.aop.aopexample.business.*.*(..))")
+    @After("com.example.aop.aopexample.aspects.CommonPointCutConfig.businessLogicExecution()")
     public void after(JoinPoint joinPoint) {
         log.info("{} was executed", joinPoint.toShortString());
     }
